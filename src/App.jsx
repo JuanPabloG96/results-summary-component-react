@@ -1,23 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
 import { Results } from './Results'
 import { Score } from './Score'
+import { useFetch } from './js/useFetch'
 import './css/App.css'
 
 export function App() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const useFetch = useCallback((url) => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .finally(() => setLoading(false));
-  }, [])
-
-  useEffect(() => {
-    setLoading(true);
-    useFetch("./src/json/data.json");
-  }, []);
+  const { data, loading } = useFetch('json/data.json');
 
   return (
     <article className="fm-app">

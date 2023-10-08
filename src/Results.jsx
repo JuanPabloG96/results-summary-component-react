@@ -1,22 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useFetch } from "./js/useFetch"
 
 export function Results() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const useFetch = useCallback((url) => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => setData(data))
-      .catch(e => console.log("fetching error: ", e))
-      .finally(() => setLoading(false));
-  }, [])
-
-  useEffect(() => {
-    setLoading(true);
-    useFetch("./src/json/data.json");
-  }, []);
-
+  const { data, loading } = useFetch('json/data.json');
   let result = 0;
   data?.map(data => {
     result += data.score;

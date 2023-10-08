@@ -8,6 +8,7 @@ export function Results() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => setData(data))
+      .catch(e => console.log("fetching error: ", e))
       .finally(() => setLoading(false));
   }, [])
 
